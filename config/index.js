@@ -4,8 +4,20 @@ module.exports = {
   // Webpack aliases
   aliases: {
     quasar: path.resolve(__dirname, '../node_modules/quasar-framework/'),
+    '@': path.resolve('src'),
     src: path.resolve(__dirname, '../src'),
     assets: path.resolve(__dirname, '../src/assets'),
+    'vue$': 'vue/dist/vue.esm.js',
+    'src': path.resolve(__dirname, '../src'),
+    'views': path.resolve(__dirname, '../src/views'),
+    'styles': path.resolve(__dirname, '../src/styles'),
+    'api': path.resolve(__dirname, '../src/api'),
+    'utils': path.resolve(__dirname, '../src/utils'),
+    'store': path.resolve(__dirname, '../src/store'),
+    'router': path.resolve(__dirname, '../src/router'),
+    'mock': path.resolve(__dirname, '../src/mock'),
+    'vendor': path.resolve(__dirname, '../src/vendor'),
+    'static': path.resolve(__dirname, '../static'),
     components: path.resolve(__dirname, '../src/components')
   },
 
@@ -35,7 +47,7 @@ module.exports = {
     openBrowser: true,
     publicPath: '/',
     port: 8080,
-
+    api: 'http://localhost',
     // If for example you are using Quasar Play
     // to generate a QR code then on each dev (re)compilation
     // you need to avoid clearing out the console, so set this
