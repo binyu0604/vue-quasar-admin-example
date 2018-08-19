@@ -20,10 +20,9 @@ module.exports = {
     app: './src/main.js'
   },
   output: {
-    path: path.resolve(__dirname, '../dist'),
-    publicPath: config[env.prod ? 'build' : 'dev'].publicPath,
-    filename: 'js/[name].js',
-    chunkFilename: 'js/[id].[chunkhash].js'
+    path: config.build.assetsRoot,
+    filename: '[name].js',
+    publicPath: process.env.NODE_ENV !== 'development' ?  config.build.assetsPublicPath: config.dev.assetsPublicPath
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],

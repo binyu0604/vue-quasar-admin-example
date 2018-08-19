@@ -25,6 +25,8 @@
 </template>
 
 <script>
+  /* eslint-disable no-undef */
+
   import {isWscnEmail} from 'utils/validate'
 
 export default {
@@ -72,7 +74,7 @@ export default {
 
       scene = new THREE.Scene()
 
-      particles = new Array()
+      particles = [] // new Array()
 
       var PI2 = Math.PI * 2
       var material = new THREE.ParticleCanvasMaterial({
@@ -146,9 +148,9 @@ export default {
 
 // animate();
 
-  function init () {
-
-  }
+  // function init () {
+  //
+  // }
 
   function onWindowResize () {
     windowHalfX = window.innerWidth / 2
@@ -167,23 +169,23 @@ export default {
     mouseY = event.clientY - windowHalfY
 }
 
-  function onDocumentTouchStart (event) {
-    if (event.touches.length === 1) {
-      event.preventDefault()
-
-      mouseX = event.touches[0].pageX - windowHalfX
-      mouseY = event.touches[0].pageY - windowHalfY
-    }
-}
-
-  function onDocumentTouchMove (event) {
-    if (event.touches.length === 1) {
-      event.preventDefault()
-
-      mouseX = event.touches[0].pageX - windowHalfX
-      mouseY = event.touches[0].pageY - windowHalfY
-    }
-}
+//   function onDocumentTouchStart (event) {
+//     if (event.touches.length === 1) {
+//       event.preventDefault()
+//
+//       mouseX = event.touches[0].pageX - windowHalfX
+//       mouseY = event.touches[0].pageY - windowHalfY
+//     }
+// }
+//
+//   function onDocumentTouchMove (event) {
+//     if (event.touches.length === 1) {
+//       event.preventDefault()
+//
+//       mouseX = event.touches[0].pageX - windowHalfX
+//       mouseY = event.touches[0].pageY - windowHalfY
+//     }
+// }
 
   //
 

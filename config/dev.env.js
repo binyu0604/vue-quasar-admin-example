@@ -3,6 +3,7 @@ var prodEnv = require('./prod.env.js')
 
 module.exports = merge(prodEnv, {
 //  PORT: 8080,
-  API: 'http://localhost',
+  SERVER_URL: `"http://localhost:8081"`,
   NODE_ENV: '"development"'
+
 })

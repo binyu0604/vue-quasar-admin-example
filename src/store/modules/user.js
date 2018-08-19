@@ -100,13 +100,13 @@ const user = {
     LoginByThirdparty ({ commit, state }, code) {
       return new Promise((resolve, reject) => {
         commit('SET_CODE', code)
-        loginByThirdparty(state.status, state.email, state.code, state.auth_type).then(response => {
-          commit('SET_TOKEN', response.data.token)
-          Cookies.set('Admin-Token', response.data.token)
-          resolve()
-        }).catch(error => {
-          reject(error)
-        })
+        // loginByThirdparty(state.status, state.email, state.code, state.auth_type).then(response => {
+        //   commit('SET_TOKEN', response.data.token)
+        //   Cookies.set('Admin-Token', response.data.token)
+        //   resolve()
+        // }).catch(error => {
+        //   reject(error)
+        // })
       })
     },
 

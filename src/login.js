@@ -1,6 +1,7 @@
+/* eslint-disable standard/object-curly-even-spacing */
 import router from './router'
 import store from './store'
-import vue from 'vue'
+// import vue from 'vue'
 import NProgress from 'nprogress' // Progress 进度条
 import 'nprogress/nprogress.css'// Progress 进度条样式
 

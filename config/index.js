@@ -2,6 +2,7 @@ var path = require('path')
 
 module.exports = {
   // Webpack aliases
+
   aliases: {
     quasar: path.resolve(__dirname, '../node_modules/quasar-framework/'),
     '@': path.resolve('src'),
@@ -32,7 +33,11 @@ module.exports = {
     env: require('./prod.env.js'),
     index: path.resolve(__dirname, '../dist/index.html'),
     publicPath: '',
-    productionSourceMap: false,
+    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsSubDirectory: 'static',
+    assetsPublicPath: './',          //请根据自己路径配置更改
+    productionSourceMap: true,
+    staticPath:'/static/',
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.
     // Before setting to `true`, make sure to:
@@ -43,18 +48,20 @@ module.exports = {
   dev: {
     env: require('./dev.env.js'),
     cssSourceMap: true,
+    assetsSubDirectory: 'static',
+    assetsPublicPath: '/',
     // auto open browser or not
     openBrowser: true,
     publicPath: '/',
     port: 8080,
-    api: 'http://localhost',
+    api: `http://localhost`,
     // If for example you are using Quasar Play
     // to generate a QR code then on each dev (re)compilation
     // you need to avoid clearing out the console, so set this
     // to "false", otherwise you can set it to "true" to always
     // have only the messages regarding your last (re)compilation.
     clearConsoleOnRebuild: false,
-
+    staticPath:'/static/',
     // Proxy your API if using any.
     // Also see /build/script.dev.js and search for "proxy api requests"
     // https://github.com/chimurai/http-proxy-middleware

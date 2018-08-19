@@ -1,3 +1,4 @@
+
 var
   config = require('../config'),
   webpack = require('webpack'),
@@ -26,12 +27,16 @@ module.exports = merge(baseWebpackConfig, {
     })
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': config.dev.env
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'src/index.html',
-      inject: true
+      inject: true,
+      path:config.dev.staticPath
     }),
     new FriendlyErrorsPlugin({
       clearConsole: config.dev.clearConsoleOnRebuild

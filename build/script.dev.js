@@ -1,3 +1,4 @@
+require('./check-versions')();
 process.env.NODE_ENV = 'development'
 
 require('colors')
