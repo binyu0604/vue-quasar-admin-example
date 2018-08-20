@@ -1,3 +1,5 @@
+process.traceDeprecation = true
+
 var
   path = require('path'),
   webpack = require('webpack'),
@@ -11,11 +13,14 @@ var
     (env.dev && config.dev.cssSourceMap) ||
     (env.prod && config.build.productionSourceMap)
 
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
 module.exports = {
+  mode: process.env.NODE_ENV,
   entry: {
     app: './src/main.js'
   },
@@ -34,6 +39,7 @@ module.exports = {
   },
   module: {
     rules: [
+
       { // eslint
         enforce: 'pre',
         test: /\.(vue|js)$/,
@@ -55,7 +61,7 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           postcss: cssUtils.postcss,
-          loaders: merge({js: 'babel-loader'}, cssUtils.styleLoaders({
+          loaders: merge({js: 'babel-loader'}, cssUtils.cssLoaders({
             sourceMap: useCssSourceMap,
             extract: env.prod
           }))
@@ -84,9 +90,10 @@ module.exports = {
     ]
   },
   plugins: [
+    // make sure to include the plugin for the magic
+    new VueLoaderPlugin(),
     /* Uncomment if you wish to load only one Moment locale: */
     // new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
-
     new webpack.DefinePlugin({
       'process.env': config[env.prod ? 'build' : 'dev'].env,
       'DEV': env.dev,

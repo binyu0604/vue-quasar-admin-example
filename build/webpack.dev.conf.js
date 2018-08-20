@@ -21,7 +21,7 @@ module.exports = merge(baseWebpackConfig, {
     noInfo: true
   },
   module: {
-    rules: cssUtils.styleRules({
+    rules: cssUtils.styleLoaders({
       sourceMap: config.dev.cssSourceMap,
       postcss: true
     })
