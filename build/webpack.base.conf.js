@@ -1,5 +1,5 @@
 process.traceDeprecation = true
-
+// process.noDeprecation = true
 var
   path = require('path'),
   webpack = require('webpack'),
@@ -13,7 +13,8 @@ var
     (env.dev && config.dev.cssSourceMap) ||
     (env.prod && config.build.productionSourceMap)
 
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin'),
+  MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -51,8 +52,14 @@ module.exports = {
         }
       },
       {
+        test: /\.special\.json$/,
+        type: "javascript/auto",
+        use: "special-loader"
+      },
+      {
         test: /\.js$/,
-        loader: 'babel-loader',
+        // loader: 'babel-loader',
+        loader: 'happypack/loader?id=babel',
         include: projectRoot,
         exclude: /node_modules/
       },
@@ -109,9 +116,47 @@ module.exports = {
     }),
     new ProgressBarPlugin({
       format: config.progressFormat
+    }),
+    new require('happypack')({
+      id: 'babel',
+      loaders: ['babel-loader']
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css',
     })
+
   ],
   performance: {
     hints: false
-  }
+  },
+  // optimization: {
+  //   //   minimize: env === 'production' ? true : false, //是否进行代码压缩
+  //   //   minimizer: [
+  //   //     new require('webpack-parallel-uglify-plugin')({
+  //   //       // 配置项
+  //   //     }),
+  //   //   ],
+  //   //   splitChunks: {
+  //   //     chunks: "async",
+  //   //     minSize: 30000, //模块大于30k会被抽离到公共模块
+  //   //     minChunks: 1, //模块出现1次就会被抽离到公共模块
+  //   //     maxAsyncRequests: 5, //异步模块，一次最多只能被加载5个
+  //   //     maxInitialRequests: 3, //入口模块最多只能加载3个
+  //   //     name: true,
+  //   //     cacheGroups: {
+  //   //       default: {
+  //   //         minChunks: 2,
+  //   //         priority: -20,
+  //   //         reuseExistingChunk: true,
+  //   //       },
+  //   //       vendors: {
+  //   //         test: /[\\/]node_modules[\\/]/,
+  //   //         priority: -10
+  //   //       }
+  //   //     }
+  //   //   },
+  //   //   runtimeChunk: {
+  //   //     name: "runtime"
+  //   //   }
+  //   // }
 }

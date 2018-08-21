@@ -40,10 +40,13 @@ var hotMiddleware = require('webpack-hot-middleware')(compiler, {
 })
 
 // force page reload when html-webpack-plugin template changes
+// 当html-webpack-plugin模板更改时，强制页面重新加载
 compiler.plugin('compilation', function (compilation) {
   compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
-    hotMiddleware.publish({ action: 'reload' })
-    cb()
+    //hotMiddleware.publish({ action: 'reload' })
+    if(cb) {
+      cb()
+    }
   })
 })
 

@@ -18,13 +18,13 @@ var webpackConfig = merge(baseWebpackConfig, {
   },
   devtool: config.build.productionSourceMap ? '#source-map' : false,
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: config.build.productionSourceMap,
-      minimize: true,
-      compress: {
-        warnings: false
-      }
-    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   sourceMap: config.build.productionSourceMap,
+    //   minimize: true,
+    //   compress: {
+    //     warnings: false
+    //   }
+    // }),
     // extract css into its own file
     new ExtractTextPlugin({
       filename: '[name].[contenthash].css'
@@ -63,7 +63,24 @@ var webpackConfig = merge(baseWebpackConfig, {
       name: 'manifest',
       chunks: ['vendor']
     })
-  ]
+  ],
+  performance: {
+    hints: 'warning',
+    maxAssetSize: 250000, //单文件超过250k，命令行告警
+    maxEntrypointSize: 250000, //首次加载文件总和超过250k，命令行告警
+  },
+  optimization: {
+    minimize: true, //取代 new UglifyJsPlugin(/* ... */)
+    providedExports: true,
+    usedExports: true,
+    //识别package.json中的sideEffects以剔除无用的模块，用来做tree-shake
+    //依赖于optimization.providedExports和optimization.usedExports
+    sideEffects: true,
+    //取代 new webpack.optimize.ModuleConcatenationPlugin()
+    concatenateModules: true,
+    //取代 new webpack.NoEmitOnErrorsPlugin()，编译错误时不打印输出资源。
+    noEmitOnErrors: true
+  }
 })
 
 if (config.build.productionGzip) {
